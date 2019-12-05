@@ -11,9 +11,9 @@ for candidate in range(min, max + 1):
     ascending = True
     for i in range(1, len(candidate_str)):
         current = candidate_str[i]
-        last = candidate_str[i-1]
-        next = None if i+1 == len(candidate_str) else candidate_str[i+1]
-        next_last = None if i == 1 else candidate_str[i-2]
+        last = candidate_str[i - 1]
+        next = None if i + 1 == len(candidate_str) else candidate_str[i + 1]
+        next_last = None if i == 1 else candidate_str[i - 2]
         if current < last:
             ascending = False
             break
@@ -28,3 +28,6 @@ for candidate in range(min, max + 1):
 
 print(f"Part 1: {part_1_total}")
 print(f"Part 2: {part_2_total}")
+
+if part_1_total != 1650 or part_2_total != 1129:
+    raise Exception()

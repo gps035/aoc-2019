@@ -42,7 +42,10 @@ def find_noun_and_verb(expected_result: int, program: List[int]):
 op_codes = [int(x) for x in open("day2_input.txt", "r").readline().split(",")]
 
 program_output = run_program(op_codes, 12, 2)
-print(f"Part 1: {program_output}")
-
 correct_input = find_noun_and_verb(19690720, op_codes)
+
+print(f"Part 1: {program_output}")
 print(f"Part 2: {correct_input}")
+
+if program_output != 2890696 or correct_input != 8226:
+    raise Exception()

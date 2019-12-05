@@ -33,6 +33,11 @@ for x in paths:
         total = distances.get(point, 0)
         distances[point] = total + steps
 
-print(f"Part 1: {min([abs(i[0]) + abs(i[1]) for i in wires_crossed])}")
+shortest_distance_to_origin = min([abs(i[0]) + abs(i[1]) for i in wires_crossed])
+shortest_distance_along_wires = min([distances[x] for x in wires_crossed])
 
-print(f"Part 2: {min([distances[x] for x in wires_crossed])}")
+print(f"Part 1: {shortest_distance_to_origin}")
+print(f"Part 2: {shortest_distance_along_wires}")
+
+if shortest_distance_to_origin != 865 or shortest_distance_along_wires != 35038:
+    raise Exception()
