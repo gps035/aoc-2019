@@ -15,6 +15,10 @@ def run_program(program: List[int], program_input: List[int] = None):
         first_value = first_value.zfill(2)
 
         op_code = first_value[-2:]
+
+        if op_code == "99":
+            break
+
         parameter_modes = first_value[:-2]
 
         # Edge case - Pad with enough leading 0s (default)  for max number of params
@@ -31,46 +35,36 @@ def run_program(program: List[int], program_input: List[int] = None):
         def get_param(number: int):
             return program[get_param_index(number)]
 
-        if op_code == "99":
-            break
-        elif op_code == "01":
+        if op_code == "01":
             result = get_param(1) + get_param(2)
             program[get_param_index(3)] = result
             pc = pc + 4
-            continue
         elif op_code == "02":
             result = get_param(1) * get_param(2)
             program[get_param_index(3)] = result
             pc = pc + 4
-            continue
         elif op_code == "03":
             program[get_param_index(1)] = program_input[ic]
             ic += 1
             pc = pc + 2
-            continue
         elif op_code == "04":
             yield get_param(1)
             pc = pc + 2
-            continue
         elif op_code == "05":
             if get_param(1) != 0:
                 pc = get_param(2)
             else:
                 pc = pc + 3
-            continue
         elif op_code == "06":
             if get_param(1) == 0:
                 pc = get_param(2)
             else:
                 pc = pc + 3
-            continue
         elif op_code == "07":
             program[get_param_index(3)] = 1 if get_param(1) < get_param(2) else 0
             pc = pc + 4
-            continue
         elif op_code == "08":
             program[get_param_index(3)] = 1 if get_param(1) == get_param(2) else 0
             pc = pc + 4
-            continue
         else:
             raise Exception()
