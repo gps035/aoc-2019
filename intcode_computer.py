@@ -4,7 +4,6 @@ from typing import List
 def run_program(program: List[int], program_input: List[int] = None):
     if not program_input:
         program_input = []
-    program_output = []
 
     pc = 0
     ic = 0
@@ -50,7 +49,7 @@ def run_program(program: List[int], program_input: List[int] = None):
             pc = pc + 2
             continue
         elif op_code == "04":
-            program_output.append(get_param(1))
+            yield get_param(1)
             pc = pc + 2
             continue
         elif op_code == "05":
@@ -75,5 +74,3 @@ def run_program(program: List[int], program_input: List[int] = None):
             continue
         else:
             raise Exception()
-
-    return program_output

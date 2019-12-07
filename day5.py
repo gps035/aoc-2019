@@ -2,11 +2,12 @@ from intcode_computer import run_program
 
 op_codes = [int(x) for x in open("day5_input.txt", "r").readline().split(",")]
 
-output = run_program(op_codes.copy(), [1])
-part1_output = output[-1]
 
-output = run_program(op_codes.copy(), [5])
-part2_output = output[0]
+part1_output = 0
+for part1_output in run_program(op_codes.copy(), [1]):
+    pass
+
+part2_output = next(run_program(op_codes.copy(), [5]))
 
 print(f"Part 1: {part1_output}")
 print(f"Part 2: {part2_output}")
