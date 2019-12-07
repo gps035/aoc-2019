@@ -1,11 +1,10 @@
 from typing import List
 
 
-def run_program(program: List[int], program_input: List[int] = None, program_output: List[int] = None):
+def run_program(program: List[int], program_input: List[int] = None):
     if not program_input:
         program_input = []
-    if not program_output:
-        program_output = []
+    program_output = []
 
     pc = 0
     ic = 0
@@ -77,4 +76,4 @@ def run_program(program: List[int], program_input: List[int] = None, program_out
         else:
             raise Exception()
 
-    return program[0], program_output
+    return program_output

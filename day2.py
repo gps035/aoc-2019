@@ -13,14 +13,18 @@ def update_noun_and_verb(program: List[int], noun: int, verb: int):
 def find_noun_and_verb(expected_result: int, program: List[int]):
     for n in range(0, 99):
         for v in range(0, 99):
-            this_output, _ = run_program(update_noun_and_verb(program, n, v))
+            current_program = update_noun_and_verb(program, n, v)
+            run_program(current_program)
+            this_output = current_program[0]
             if this_output == expected_result:
                 return (n * 100) + v
 
 
 op_codes = [int(x) for x in open("day2_input.txt", "r").readline().split(",")]
 
-program_output, _ = run_program(update_noun_and_verb(op_codes, 12, 2))
+program = update_noun_and_verb(op_codes, 12, 2)
+run_program(program)
+program_output = program[0]
 correct_input = find_noun_and_verb(19690720, op_codes)
 
 print(f"Part 1: {program_output}")
