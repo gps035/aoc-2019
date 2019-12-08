@@ -17,14 +17,10 @@ def flatten_layers(image_data: str, image_height: int, image_width: int):
     image_layers = split_into_layers(image_data, image_height, image_width)
     image = ""
     for index in range(len(image_layers[0])):
-        added = False
+        next_pixel = "2"
         for layer in image_layers:
-            pixel_in_layer = layer[index]
-            if pixel_in_layer == "2":
-                continue
-            image += pixel_in_layer
-            added = True
-            break
-        if not added:
-            image += "2"
+            if layer[index] != "2":
+                next_pixel = layer[index]
+                break
+        image += next_pixel
     return image
