@@ -51,15 +51,9 @@ def run_program(program: List[int], program_input: List[int] = None):
             yield get_param(1)
             pc = pc + 2
         elif op_code == "05":
-            if get_param(1) != 0:
-                pc = get_param(2)
-            else:
-                pc = pc + 3
+            pc = get_param(2) if get_param(1) != 0 else pc + 3
         elif op_code == "06":
-            if get_param(1) == 0:
-                pc = get_param(2)
-            else:
-                pc = pc + 3
+            pc = get_param(2) if get_param(1) == 0 else pc + 3
         elif op_code == "07":
             program[get_param_index(3)] = 1 if get_param(1) < get_param(2) else 0
             pc = pc + 4
