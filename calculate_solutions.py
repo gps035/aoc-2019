@@ -4,6 +4,7 @@ from typing import List, Tuple
 import solution_inputs
 from amplifiers import run_amps, NUMBER_OF_AMPS
 from fuel import get_fuel_requirement, get_total_fuel_requirement
+from image_decoding import calculate_checksum, flatten_layers
 from intcode_computer import run_program
 from orbits import orbital_transfers_required, count_total_orbits
 from passwords import is_valid_password_simple, is_valid_password_strict
@@ -131,4 +132,27 @@ print(f"Part 1: {day7_part1_result}")
 print(f"Part 2: {day7_part2_result}")
 
 if day7_part1_result != 116680 or day7_part2_result != 89603079:
+    raise Exception()
+
+print("\nDay 8")
+
+width = 25
+height = 6
+day8_part1_result = calculate_checksum(solution_inputs.day8_input, width, height)
+day8_part2_result = flatten_layers(solution_inputs.day8_input, width, height)
+
+
+def render_image(image: str, image_width: int):
+    first_index = 0
+    while first_index < len(image):
+        row = image[first_index:first_index + image_width]
+        first_index += image_width
+        print(row.replace("0", "░░").replace("1", "██"))
+
+
+print(f"Part 1: {day8_part1_result}")
+print(f"Part 2:")
+render_image(day8_part2_result, width)
+
+if day8_part1_result != 1596 or day8_part2_result != "100001110011100011001111010000100101001010010100001000011100100101000011100100001001011100100001000010000100101010010010100001111011100100100110011110":
     raise Exception()
