@@ -7,6 +7,7 @@ def run_program(program: List[int], program_input: List[int] = None):
 
     pc = 0
     ic = 0
+    rb = 0
 
     while True:
         first_value = str(program[pc])
@@ -30,21 +31,35 @@ def run_program(program: List[int], program_input: List[int] = None):
                 return program[pc + number]
             if mode == '1':
                 return pc + number
+            if mode == '2':
+                return rb + program[pc + number]
             raise Exception()
 
+        def expand_memory(index: int):
+            for _ in range(len(program), index + 1):
+                program.append(0)
+            return index
+
         def get_param(number: int):
-            return program[get_param_index(number)]
+            index = get_param_index(number)
+            expand_memory(index)
+            return program[index]
+
+        def set_param(number: int, value):
+            index = get_param_index(number)
+            expand_memory(index)
+            program[index] = value
 
         if op_code == "01":
             result = get_param(1) + get_param(2)
-            program[get_param_index(3)] = result
+            set_param(3, result)
             pc = pc + 4
         elif op_code == "02":
             result = get_param(1) * get_param(2)
-            program[get_param_index(3)] = result
+            set_param(3, result)
             pc = pc + 4
         elif op_code == "03":
-            program[get_param_index(1)] = program_input[ic]
+            set_param(1, program_input[ic])
             ic += 1
             pc = pc + 2
         elif op_code == "04":
@@ -55,10 +70,13 @@ def run_program(program: List[int], program_input: List[int] = None):
         elif op_code == "06":
             pc = get_param(2) if get_param(1) == 0 else pc + 3
         elif op_code == "07":
-            program[get_param_index(3)] = 1 if get_param(1) < get_param(2) else 0
+            set_param(3, 1 if get_param(1) < get_param(2) else 0)
             pc = pc + 4
         elif op_code == "08":
-            program[get_param_index(3)] = 1 if get_param(1) == get_param(2) else 0
+            set_param(3, 1 if get_param(1) == get_param(2) else 0)
             pc = pc + 4
+        elif op_code == "09":
+            rb += get_param(1)
+            pc = pc + 2
         else:
             raise Exception()

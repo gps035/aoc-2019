@@ -139,45 +139,45 @@ class TestIntCodeComputer(unittest.TestCase):
         output = list(run_program(program, [3]))
         self.assertEqual(output, [1])
 
+    three_way_cmp_program = [
+        3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125, 20, 4,
+        20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
+    ]
+
     def test_3_way_comparison_1(self):
-        program = [
-            3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125,
-            20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
-        ]
-        output = list(run_program(program, [6]))
+        output = list(run_program(self.three_way_cmp_program, [6]))
         self.assertEqual(output, [999])
 
     def test_3_way_comparison_2(self):
-        program = [
-            3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125,
-            20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
-        ]
-        output = list(run_program(program, [7]))
+        output = list(run_program(self.three_way_cmp_program, [7]))
         self.assertEqual(output, [999])
 
     def test_3_way_comparison_3(self):
-        program = [
-            3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125,
-            20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
-        ]
-        output = list(run_program(program, [8]))
+        output = list(run_program(self.three_way_cmp_program, [8]))
         self.assertEqual(output, [1000])
 
     def test_3_way_comparison_4(self):
-        program = [
-            3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125,
-            20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
-        ]
-        output = list(run_program(program, [9]))
+        output = list(run_program(self.three_way_cmp_program, [9]))
         self.assertEqual(output, [1001])
 
     def test_3_way_comparison_5(self):
-        program = [
-            3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125,
-            20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
-        ]
-        output = list(run_program(program, [10]))
+        output = list(run_program(self.three_way_cmp_program, [10]))
         self.assertEqual(output, [1001])
+
+    def test_relative_and_extra_space(self):
+        program = [109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99]
+        output = list(run_program(program.copy(), []))
+        self.assertEqual(program, output)
+
+    def test_large_numbers_1(self):
+        output = list(run_program([1102, 34915192, 34915192, 7, 4, 7, 99, 0], []))
+        self.assertEqual([1219070632396864], output)
+
+    def test_large_numbers_2(self):
+        expected_output = 1125899906842624
+        program = [104, expected_output, 99]
+        output = list(run_program(program, []))
+        self.assertEqual([expected_output], output)
 
 
 if __name__ == '__main__':

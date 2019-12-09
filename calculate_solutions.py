@@ -156,3 +156,15 @@ render_image(day8_part2_result, width)
 
 if day8_part1_result != 1596 or day8_part2_result != "100001110011100011001111010000100101001010010100001000011100100101000011100100001001011100100001000010000100101010010010100001111011100100100110011110":
     raise Exception()
+
+print("\nDay 9")
+
+day9_part1_result = list(run_program(solution_inputs.day9_input.copy(), [1]))
+day9_part2_result = list(run_program(solution_inputs.day9_input.copy(), [2]))
+
+
+print(f"Part 1: {day9_part1_result}")
+print(f"Part 2: {day9_part2_result}")
+
+if day9_part1_result != [2453265701] or day9_part2_result != [80805]:
+    raise Exception()
